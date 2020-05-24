@@ -1,24 +1,47 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'java'
+    id "base"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
 }
 
-group = 'portaltek.hexa'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+description = """hexa-project"""
 
-repositories {
-    mavenCentral()
-}
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+allprojects {
+    group = 'portaltek.hexa'
+    version = '0.0.1-SNAPSHOT'
+
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
     }
 }
 
-test {
-    useJUnitPlatform()
+subprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        dependencies {
+
+        }
+    }
+    dependencies {
+
+        compile 'org.apache.commons:commons-collections4:4.4'
+        implementation 'org.apache.commons:commons-lang3:3.9'
+
+        compileOnly 'org.projectlombok:lombok:1.18.8'
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+        testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+        testCompile 'org.junit.jupiter:junit-jupiter-params:5.4.2'
+        testCompile 'org.mockito:mockito-core:2.+'
+        testCompile 'org.mockito:mockito-junit-jupiter:2.18.3'
+    }
+
 }
