@@ -1,4 +1,12 @@
-group = 'portaltek.hexa.spi.repo'
+plugins {
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+//    id 'java'
+}
 
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
 
 

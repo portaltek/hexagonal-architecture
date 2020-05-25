@@ -1,4 +1,4 @@
 rootProject.name = 'hexa-project'
 
 include ':modules:hexa-domain'
-//include ':modules:hexa-spi-repo'
+include ':modules:hexa-spi-repo'

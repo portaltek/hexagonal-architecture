@@ -15,6 +15,10 @@ allprojects {
     repositories {
         mavenCentral()
     }
+    test {
+        useJUnitPlatform()
+    }
+
 }
 
 subprojects {
@@ -30,7 +34,7 @@ subprojects {
     }
     dependencies {
 
-        compile 'org.apache.commons:commons-collections4:4.4'
+        implementation 'org.apache.commons:commons-collections4:4.4'
         implementation 'org.apache.commons:commons-lang3:3.9'
 
         compileOnly 'org.projectlombok:lombok:1.18.8'
@@ -38,10 +42,10 @@ subprojects {
 
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
-        testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
-        testCompile 'org.junit.jupiter:junit-jupiter-params:5.4.2'
-        testCompile 'org.mockito:mockito-core:2.+'
-        testCompile 'org.mockito:mockito-junit-jupiter:2.18.3'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+        testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.2'
+        testImplementation 'org.mockito:mockito-core:2.+'
+        testImplementation 'org.mockito:mockito-junit-jupiter:2.18.3'
     }
 
 }
