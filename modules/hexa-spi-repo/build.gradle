@@ -1,13 +1,103 @@
 plugins {
     id 'org.springframework.boot' version '2.3.0.RELEASE'
-//    id 'java'
+    id 'java'
+
 }
+
 
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+//    itestImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  //  itestImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+
+//sourceSets {
+//    integration {
+//        java.srcDir "$projectDir/src/integration/java"
+//        resources.srcDir "$projectDir/src/integration/resources"
+//        compileClasspath += main.output + test.output
+//        runtimeClasspath += main.output + test.output
+//    }
+//}
+//
+//
+//task integrationTest(type: Test) {
+//    testClassesDirs = sourceSets.integration.output.classesDirs
+//    classpath = sourceSets.integration.runtimeClasspath
+//}
+//
+//check.dependsOn integrationTest
+
+//sourceSets {
+//    integrationTest {
+//        java {
+//            compileClasspath += main.output + test.output
+//            runtimeClasspath += main.output + test.output
+//            srcDir file('src/integration/java')
+//        }
+//        resources.srcDir file('src/integration/resources')
+//    }
+//}
+//
+//configurations {
+//    integrationTestCompile.extendsFrom testCompile
+//    integrationTestRuntime.extendsFrom testRuntime
+//}
+//
+//check.dependsOn integrationTest
+//integrationTest.mustRunAfter test
+
+
+
+//
+//sourceSets {
+//    integrationTest {
+//        java.srcDir file('src/integration/java')
+//        resources.srcDir file('src/integration/resources')
+//        //compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
+//        compileClasspath += sourceSets.main.output + sourceSets.test.output + configurations.testRuntimeClasspath
+//        runtimeClasspath += output + compileClasspath
+//    }
+//}
+//
+//task integrationTest(type: Test) {
+//    description = 'Runs the integration tests.'
+//    group = 'verification'
+//    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+//    classpath = sourceSets.integrationTest.runtimeClasspath
+//    //mustRunAfter test
+//}
+//
+//check.dependsOn integrationTest
+
+
+
+
+//test {
+//    String testType = System.properties['test.type']
+//    if (testType == 'integration') {
+//        include '**/*IntegrationTest.*'
+//        include '**/*IntegrationSpec.*'
+//    } else if (testType == 'unit') {
+//        include '**/*Test.*'
+//        include '**/*Spec.*'
+//        exclude '**/*IntegrationTest.*'
+//        exclude '**/*IntegrationSpec.*'
+//    }
+//    else {
+//        include '**/*Test.*'
+//        include '**/*Spec.*'
+//    }
+//}
+//
+//task integrationTest(type: Test, description: 'Runs the integration tests', group: 'Verification') {
+//    include '**/*IntegrationTest.*'
+//    include '**/*IntegrationSpec.*'
+//}
 
 
