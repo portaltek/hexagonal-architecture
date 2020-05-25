@@ -11,14 +11,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class ApplicationIntegrationTest {
+class AppIntegrationTest {
 
 	@Autowired
 	CatalogRepo repo;
 
 	@Test
 	void contextLoads() {
-		System.out.println("HexaSpiRepoApplicationTests.contextLoads");
+		System.out.println("AppIntegrationTest.contextLoads");
 		repo.save(new Catalog().id(1L));
 		repo.save(new Catalog().id(2L));
 

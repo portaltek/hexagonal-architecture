@@ -12,7 +12,6 @@ allprojects {
     version = '0.0.1-SNAPSHOT'
 
     apply plugin: 'java'
-    apply plugin: 'idea'
 
     repositories {
         mavenCentral()
@@ -52,37 +51,25 @@ subprojects {
         testImplementation      'org.mockito:mockito-junit-jupiter:2.18.3'
 
     }
-    test {
-        useJUnitPlatform()
-    }
-
 
     sourceSets {
-        integrationTest {
+        integration {
             java.srcDir file('src/integration/java')
             resources.srcDir file('src/integration/resources')
             compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
             runtimeClasspath += output + compileClasspath
-            //compileClasspath += main.output + test.output
-            //runtimeClasspath += main.output + test.output
         }
     }
-    configurations {
-        integrationTestCompile.extendsFrom testCompile
-        integrationTestRuntime.extendsFrom testRuntime
-    }
-    task integrationTest(type: Test) {
-        group = 'verification'
-        testClassesDirs = sourceSets.integrationTest.output.classesDirs
-        classpath = sourceSets.integrationTest.runtimeClasspath
 
+    task integration(type: Test) {
+        group = 'verification'
+        testClassesDirs = sourceSets.integration.output.classesDirs
+        classpath = sourceSets.integration.runtimeClasspath
         mustRunAfter test
     }
+    check.dependsOn integration
 
-
-    check.dependsOn integrationTest
-
-    integrationTest {
+    integration {
         useJUnitPlatform()
     }
 
