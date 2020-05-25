@@ -8,6 +8,7 @@ class HexaSpiRepoApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("TESTING HexaSpiRepoApplicationTests.contextLoads()");
 	}
 
 }
