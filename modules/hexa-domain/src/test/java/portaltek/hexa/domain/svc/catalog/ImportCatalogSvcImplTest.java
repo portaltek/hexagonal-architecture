@@ -1,30 +1,24 @@
 package portaltek.hexa.domain.svc.catalog;
 
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import portaltek.hexa.domain.HexaException;
-import portaltek.hexa.domain.dto.catalog.Account;
 import portaltek.hexa.domain.dto.catalog.Catalog;
-import portaltek.hexa.domain.dto.catalog.Company;
-import portaltek.hexa.domain.dto.catalog.FiscalPeriod;
 import portaltek.hexa.spi.repo.CatalogRepo;
-import portaltek.hexa.spi.repo.AccountRepo;
 import portaltek.hexa.spi.repo.CompanyRepo;
 import portaltek.hexa.spi.repo.FiscalPeriodRepo;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.*;
+import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidCatalog;
+import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidCmd;
 
 @ExtendWith(MockitoExtension.class)
 class ImportCatalogSvcImplTest {
@@ -36,17 +30,10 @@ class ImportCatalogSvcImplTest {
     @Mock
     CatalogRepo catalogRepo;
     @Mock
-    ImportCatalogValidator validator;
-    @Mock
     ImportCatalogNotifier notifier;
 
     @InjectMocks
     ImportCatalogSvcImpl svc;
-
-    @BeforeEach
-    void setUp() {
-    }
-
 
     @Test
     void givenNewValidCmd_willCreateCatalog() throws HexaException {
@@ -66,6 +53,8 @@ class ImportCatalogSvcImplTest {
         assertNotNull(catalogOutput);
         assertEquals(catalog, catalogOutput);
         verify(notifier).notify(catalog);
+
+
     }
 
 
