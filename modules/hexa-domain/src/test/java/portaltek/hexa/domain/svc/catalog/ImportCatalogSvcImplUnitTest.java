@@ -21,7 +21,7 @@ import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidC
 import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidCmd;
 
 @ExtendWith(MockitoExtension.class)
-class ImportCatalogSvcImplTest {
+class ImportCatalogSvcImplUnitTest {
 
     @Mock
     CompanyRepo companyRepo;

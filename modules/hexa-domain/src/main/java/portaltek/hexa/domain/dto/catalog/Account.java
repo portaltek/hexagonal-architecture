@@ -1,14 +1,15 @@
 package portaltek.hexa.domain.dto.catalog;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.util.Objects;
 
 @Data
 @Builder
 @Accessors(fluent = true)
-@AllArgsConstructor
 public class Account {
 
     private Long id;
@@ -16,8 +17,6 @@ public class Account {
     private String name;
     private String description;
     private Catalog catalog;
-
-
 
 
 }

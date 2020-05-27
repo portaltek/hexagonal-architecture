@@ -8,22 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Builder
 @Accessors(fluent = true)
-public class Catalog {
+public class FiscalPeriod {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private Company company;
-    private FiscalPeriod fiscalPeriod;
-    private Set<Account> accountList;
-
-
-
+    private String name;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
 }

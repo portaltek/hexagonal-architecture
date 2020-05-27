@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class Catalog {
 
     private Company company;
     private FiscalPeriod fiscalPeriod;
-    private Set<Account> accountList;
+    private Collection<Account> accounts;
     private Boolean valid;
 
 

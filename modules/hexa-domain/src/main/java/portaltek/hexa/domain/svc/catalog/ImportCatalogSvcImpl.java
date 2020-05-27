@@ -41,7 +41,7 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
         Catalog catalog = Catalog.builder()
                 .company(company)
                 .fiscalPeriod(fiscalPeriod)
-                .accountList(cmd.accounts())
+                .accounts(cmd.accounts())
                 .build();
 
 
