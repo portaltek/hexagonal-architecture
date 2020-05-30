@@ -6,5 +6,5 @@ import portaltek.hexa.domain.interfaces.Service;
 
 
 public interface ImportCatalogSvc extends Service {
-    Catalog doImport(ImportCatalogCmd cmd) throws HexaException;
+    Catalog importCatalog(ImportCatalogCmd cmd) throws HexaException;
 }

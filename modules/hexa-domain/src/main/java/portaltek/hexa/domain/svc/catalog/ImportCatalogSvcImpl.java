@@ -21,7 +21,7 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
 
 
 
-    public Catalog doImport(ImportCatalogCmd cmd) throws HexaException {
+    public Catalog importCatalog(ImportCatalogCmd cmd) throws HexaException {
 
         Catalog oldCatalog = catalogRepo
                 .findByCompanyIdAndFiscalPeriodId(cmd.companyId(), cmd.fiscalPeriodId());
@@ -35,9 +35,11 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
 
     private Catalog createCatalog(ImportCatalogCmd cmd) throws HexaException {
 
+        //QUERY APIs
         Company company = companyRepo.findById(cmd.companyId());
         FiscalPeriod fiscalPeriod = fiscalPeriodRepo.findById(cmd.fiscalPeriodId());
 
+        //BUILD DTO
         Catalog catalog = Catalog.builder()
                 .company(company)
                 .fiscalPeriod(fiscalPeriod)
@@ -47,6 +49,8 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
 
 
         //validator.validate(catalog);
+
+        //Notify SPIs
         notifier.notify(catalog);
 
         return catalog;

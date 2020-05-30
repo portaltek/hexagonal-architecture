@@ -2,6 +2,7 @@ package portaltek.hexa.spi.repo.entities;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Entity;
@@ -11,8 +12,8 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@Builder
 @Accessors(fluent = true)
+@NoArgsConstructor
 public class Company {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

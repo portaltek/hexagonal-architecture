@@ -47,7 +47,7 @@ class ImportCatalogSvcImplUnitTest {
         given(fiscalPeriodRepo.findById(any(Long.class))).willReturn(catalog.fiscalPeriod());
 
         //WHEN
-        Catalog catalogOutput = svc.doImport(cmd);
+        Catalog catalogOutput = svc.importCatalog(cmd);
 
         //THEN
         assertNotNull(catalogOutput);

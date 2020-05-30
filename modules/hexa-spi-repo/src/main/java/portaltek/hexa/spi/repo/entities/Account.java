@@ -2,17 +2,15 @@ package portaltek.hexa.spi.repo.entities;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
-@Builder
 @Accessors(fluent = true)
+@NoArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -20,6 +18,7 @@ public class Account {
     private String code;
     private String name;
     private String description;
+    @ManyToOne
     private Catalog catalog;
 
 

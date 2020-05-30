@@ -54,27 +54,9 @@ subprojects {
         testImplementation      'org.mockito:mockito-core:2.+'
         testImplementation      'org.mockito:mockito-junit-jupiter:2.18.3'
 
+
     }
 
-    sourceSets {
-        integration {
-            java.srcDir file('src/integration/java')
-            resources.srcDir file('src/integration/resources')
-            compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
-            runtimeClasspath += output + compileClasspath
-        }
-    }
 
-    task integration(type: Test) {
-        group = 'verification'
-        testClassesDirs = sourceSets.integration.output.classesDirs
-        classpath = sourceSets.integration.runtimeClasspath
-        mustRunAfter test
-    }
-    check.dependsOn integration
-
-    integration {
-        useJUnitPlatform()
-    }
 
 }
