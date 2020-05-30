@@ -25,7 +25,8 @@ public class Catalog {
     @ManyToOne
     private FiscalPeriod fiscalPeriod;
     @OneToMany
-    private List<Account> accountList;
+    @JoinColumn(name = "catalog_id")
+    private List<Account> accounts;
 
 
 }
