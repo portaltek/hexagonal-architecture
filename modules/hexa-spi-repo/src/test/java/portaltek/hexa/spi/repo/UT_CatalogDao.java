@@ -7,9 +7,8 @@ import org.junit.jupiter.api.Test;
 class UT_CatalogDao {
 
 	@Test
-	void unitTest() {
-		log.info("AppUnitTest.unitTest");
-		System.out.println("AppUnitTest.unitTest");
+	void save() {
+
 	}
 
 }

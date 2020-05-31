@@ -3,7 +3,6 @@ package portaltek.hexa.domain;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data

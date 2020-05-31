@@ -3,13 +3,10 @@ package portaltek.hexa.domain.svc.catalog;
 import lombok.Value;
 import lombok.experimental.Accessors;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.Predicate;
 import portaltek.hexa.domain.HexaException;
 import portaltek.hexa.domain.dto.catalog.Account;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static portaltek.hexa.domain.enums.ErrorType.*;

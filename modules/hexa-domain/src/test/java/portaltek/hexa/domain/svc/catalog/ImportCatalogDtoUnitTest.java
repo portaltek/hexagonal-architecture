@@ -2,19 +2,15 @@ package portaltek.hexa.domain.svc.catalog;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import portaltek.hexa.domain.HexaException;
 import portaltek.hexa.domain.dto.catalog.Account;
-import portaltek.hexa.domain.enums.ErrorType;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

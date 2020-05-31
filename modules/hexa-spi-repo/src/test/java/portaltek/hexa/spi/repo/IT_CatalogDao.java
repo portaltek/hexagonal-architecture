@@ -1,42 +1,48 @@
 package portaltek.hexa.spi.repo;
 
 
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import portaltek.hexa.spi.repo.entities.Catalog;
+import portaltek.hexa.spi.repo.entities.Company;
+import portaltek.hexa.spi.repo.entities.FiscalPeriod;
 import portaltek.hexa.spi.repo.repo.CatalogDao;
+import portaltek.hexa.spi.repo.repo.CompanyDao;
+import portaltek.hexa.spi.repo.repo.FiscalPeriodDao;
 
-import java.util.List;
+import static org.junit.Assert.assertNotNull;
+import static portaltek.hexa.spi.repo._TestUtil_CatalogBuilder.*;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
+@Slf4j
 @SpringBootTest
-//@ExtendWith(SpringExtension.class)
-//@DataJpaTest
-public class IT_CatalogDao {
-	static Logger log = LoggerFactory.getLogger(IT_CatalogDao.class);
+class IT_CatalogDao {
 
 	@Autowired
-    private CatalogDao repo;
+    private CatalogDao dao;
+	@Autowired
+	private FiscalPeriodDao fiscalPeriodDao;
+	@Autowired
+	private CompanyDao companyDao;
+
+	@BeforeEach
+	void init(){
+
+	}
 
 	@Test
 	void save() {
+		FiscalPeriod fiscalPeriod = fiscalPeriodDao.save(getValidFiscalPeriod(1L));
+		Company company = companyDao.save(getValidCompany(1L));
+		Catalog catalog1 = getValidCatalog(1L, 3L).id(null)
+				.company(company)
+				.fiscalPeriod(fiscalPeriod)
+				.accounts(null);
+		dao.save(catalog1);
 
-		log.info("AppIntegrationTest.contextLoads");
-
-		repo.save(new Catalog().id(1L));
-		repo.save(new Catalog().id(2L));
-
-		List<Catalog> catalogs = (List<Catalog>) repo.findAll();
-		assertEquals(2, catalogs.size());
+		assertNotNull(catalog1.id());
 	}
 
 
