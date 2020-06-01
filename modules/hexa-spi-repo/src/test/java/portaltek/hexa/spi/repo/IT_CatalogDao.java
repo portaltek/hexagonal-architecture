@@ -2,23 +2,22 @@ package portaltek.hexa.spi.repo;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import portaltek.hexa.spi.repo.entities.Catalog;
-import portaltek.hexa.spi.repo.entities.Company;
-import portaltek.hexa.spi.repo.entities.FiscalPeriod;
 import portaltek.hexa.spi.repo.dao.CatalogDao;
 import portaltek.hexa.spi.repo.dao.CompanyDao;
 import portaltek.hexa.spi.repo.dao.FiscalPeriodDao;
+import portaltek.hexa.spi.repo.entities.Catalog;
+import portaltek.hexa.spi.repo.entities.Company;
+import portaltek.hexa.spi.repo.entities.FiscalPeriod;
 
 import static org.junit.Assert.assertNotNull;
 import static portaltek.hexa.spi.repo._TestUtil_CatalogBuilder.*;
 
 @Slf4j
 @SpringBootTest
-class IT_CatalogDtoDao {
+class IT_CatalogDao {
 
 	@Autowired
     private CatalogDao dao;
@@ -26,11 +25,6 @@ class IT_CatalogDtoDao {
 	private FiscalPeriodDao fiscalPeriodDao;
 	@Autowired
 	private CompanyDao companyDao;
-
-	@BeforeEach
-	void init(){
-
-	}
 
 	@Test
 	void save() {

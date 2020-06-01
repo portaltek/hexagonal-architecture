@@ -5,5 +5,5 @@ import portaltek.hexa.domain.dto.catalog.FiscalPeriodDto;
 
 public interface FiscalPeriodDtoRepo {
     FiscalPeriodDto findById(Long id);
-    
+
 }

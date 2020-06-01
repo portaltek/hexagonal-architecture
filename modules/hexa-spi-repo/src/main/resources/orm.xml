@@ -1,0 +1,3 @@
+<!--<named-query name="Catalog.findByCompanyIdAndFiscalPeriodId">-->
+<!--    <query>select u from User u where u.lastname = ?1</query>-->
+<!--</named-query>-->
