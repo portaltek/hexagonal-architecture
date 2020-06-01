@@ -11,11 +11,11 @@ import java.util.Collection;
 @Builder
 @Accessors(fluent = true)
 @AllArgsConstructor
-public class Catalog {
+public class CatalogDto {
 
-    private Company company;
-    private FiscalPeriod fiscalPeriod;
-    private Collection<Account> accounts;
+    private CompanyDto companyDto;
+    private FiscalPeriodDto fiscalPeriodDto;
+    private Collection<AccountDto> accountDtos;
     private Boolean valid;
 
 

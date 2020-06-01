@@ -1,10 +1,10 @@
 package portaltek.hexa.domain.svc.catalog;
 
 
-import portaltek.hexa.domain.dto.catalog.Account;
-import portaltek.hexa.domain.dto.catalog.Catalog;
-import portaltek.hexa.domain.dto.catalog.Company;
-import portaltek.hexa.domain.dto.catalog.FiscalPeriod;
+import portaltek.hexa.domain.dto.catalog.AccountDto;
+import portaltek.hexa.domain.dto.catalog.CatalogDto;
+import portaltek.hexa.domain.dto.catalog.CompanyDto;
+import portaltek.hexa.domain.dto.catalog.FiscalPeriodDto;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -19,8 +19,8 @@ import static java.time.LocalDateTime.now;
 class ImportCatalogTestUtils {
 
 
-    static Account getValidAccount(Long id) {
-        return Account.builder()
+    static AccountDto getValidAccount(Long id) {
+        return AccountDto.builder()
                 .id(id)
                 .name("AccountNames" + id)
                 .code("AccountCode" + id)
@@ -28,7 +28,7 @@ class ImportCatalogTestUtils {
                 .build();
     }
 
-    static List<Account> getValidAccounts(int id) {
+    static List<AccountDto> getValidAccounts(int id) {
 
         return LongStream.range(0, id)
                 .mapToObj(i -> getValidAccount(i))
@@ -36,8 +36,8 @@ class ImportCatalogTestUtils {
 
     }
 
-    static Company getValidCompany(Long id) {
-        return Company.builder()
+    static CompanyDto getValidCompany(Long id) {
+        return CompanyDto.builder()
                 .id(id)
                 .code("CompanyCode" + id)
                 .name("CompanyName" + id)
@@ -45,10 +45,10 @@ class ImportCatalogTestUtils {
                 .build();
     }
 
-    static FiscalPeriod getValidFiscalPeriod(Long id) {
+    static FiscalPeriodDto getValidFiscalPeriod(Long id) {
         LocalDateTime start = now().truncatedTo(ChronoUnit.DAYS);
         LocalDateTime end = start.plusYears(1);
-        return FiscalPeriod.builder()
+        return FiscalPeriodDto.builder()
                 .id(id)
                 .name("FiscalPeriodName"+id)
                 .start(start)
@@ -56,18 +56,18 @@ class ImportCatalogTestUtils {
                 .build();
     }
 
-    static Catalog getValidCatalog(Long companyId,
-                                   Long fiscalYearId,
-                                   Long accountNumber) {
+    static CatalogDto getValidCatalog(Long companyId,
+                                      Long fiscalYearId,
+                                      Long accountNumber) {
 
-        Company company = getValidCompany(companyId);
-        FiscalPeriod fiscalPeriod = getValidFiscalPeriod(fiscalYearId);
-        Collection<Account> accounts = getValidAccounts(accountNumber.intValue());
+        CompanyDto companyDto = getValidCompany(companyId);
+        FiscalPeriodDto fiscalPeriodDto = getValidFiscalPeriod(fiscalYearId);
+        Collection<AccountDto> accountDtos = getValidAccounts(accountNumber.intValue());
 
-        return Catalog.builder()
-                .company(company)
-                .fiscalPeriod(fiscalPeriod)
-                .accounts(accounts)
+        return CatalogDto.builder()
+                .companyDto(companyDto)
+                .fiscalPeriodDto(fiscalPeriodDto)
+                .accountDtos(accountDtos)
                 .build();
     }
 
@@ -75,9 +75,9 @@ class ImportCatalogTestUtils {
                                    Long fiscalYearId,
                                    Long accountNumber) {
 
-        List<Account> accounts = getValidAccounts(accountNumber.intValue());
+        List<AccountDto> accountDtos = getValidAccounts(accountNumber.intValue());
         try{
-            return new ImportCatalogCmd(companyId, fiscalYearId, accounts);
+            return new ImportCatalogCmd(companyId, fiscalYearId, accountDtos);
         } catch (Exception e){
             return null;
         }

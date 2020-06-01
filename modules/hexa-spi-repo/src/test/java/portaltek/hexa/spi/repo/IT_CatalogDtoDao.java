@@ -18,7 +18,7 @@ import static portaltek.hexa.spi.repo._TestUtil_CatalogBuilder.*;
 
 @Slf4j
 @SpringBootTest
-class IT_CatalogDao {
+class IT_CatalogDtoDao {
 
 	@Autowired
     private CatalogDao dao;

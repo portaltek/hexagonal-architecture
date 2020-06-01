@@ -7,10 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import portaltek.hexa.domain.HexaException;
-import portaltek.hexa.domain.dto.catalog.Catalog;
-import portaltek.hexa.spi.repo.CatalogRepo;
-import portaltek.hexa.spi.repo.CompanyRepo;
-import portaltek.hexa.spi.repo.FiscalPeriodRepo;
+import portaltek.hexa.domain.dto.catalog.CatalogDto;
+import portaltek.hexa.spi.repo.CatalogDtoRepo;
+import portaltek.hexa.spi.repo.CompanyDtoRepo;
+import portaltek.hexa.spi.repo.FiscalPeriodDtoRepo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,14 +21,14 @@ import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidC
 import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidCmd;
 
 @ExtendWith(MockitoExtension.class)
-class ImportCatalogSvcImplUnitTest {
+class ImportCatalogDtoSvcImplUnitTest {
 
     @Mock
-    CompanyRepo companyRepo;
+    CompanyDtoRepo companyDtoRepo;
     @Mock
-    FiscalPeriodRepo fiscalPeriodRepo;
+    FiscalPeriodDtoRepo fiscalPeriodDtoRepo;
     @Mock
-    CatalogRepo catalogRepo;
+    CatalogDtoRepo catalogDtoRepo;
     @Mock
     CreateCatalogNotifier notifier;
 
@@ -39,20 +39,20 @@ class ImportCatalogSvcImplUnitTest {
     void givenNewValidCmd_willCreateCatalog() throws HexaException {
 
         ImportCatalogCmd cmd = getValidCmd(1L, 0L, 5L);
-        Catalog catalog = getValidCatalog(1L, 0L, 5L);
+        CatalogDto catalogDto = getValidCatalog(1L, 0L, 5L);
 
         //GIVEN
-        given(catalogRepo.findByCompanyIdAndFiscalPeriodId(any(Long.class), any(Long.class))).willReturn(null);
-        given(companyRepo.findById(any(Long.class))).willReturn(catalog.company());
-        given(fiscalPeriodRepo.findById(any(Long.class))).willReturn(catalog.fiscalPeriod());
+        given(catalogDtoRepo.findByCompanyIdAndFiscalPeriodId(any(Long.class), any(Long.class))).willReturn(null);
+        given(companyDtoRepo.findById(any(Long.class))).willReturn(catalogDto.companyDto());
+        given(fiscalPeriodDtoRepo.findById(any(Long.class))).willReturn(catalogDto.fiscalPeriodDto());
 
         //WHEN
-        Catalog catalogOutput = svc.importCatalog(cmd);
+        CatalogDto catalogDtoOutput = svc.importCatalog(cmd);
 
         //THEN
-        assertNotNull(catalogOutput);
-        assertEquals(catalog, catalogOutput);
-        verify(notifier).notify(catalog);
+        assertNotNull(catalogDtoOutput);
+        assertEquals(catalogDto, catalogDtoOutput);
+        verify(notifier).notify(catalogDto);
 
 
     }

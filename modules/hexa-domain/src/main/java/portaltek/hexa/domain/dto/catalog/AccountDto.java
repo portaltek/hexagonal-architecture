@@ -7,11 +7,13 @@ import lombok.experimental.Accessors;
 @Data
 @Builder
 @Accessors(fluent = true)
-public class Company {
+public class AccountDto {
 
     private Long id;
     private String code;
     private String name;
     private String description;
+    private CatalogDto catalogDto;
+
 
 }

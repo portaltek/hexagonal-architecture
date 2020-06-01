@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @Accessors(fluent = true)
-public class FiscalPeriod {
+public class FiscalPeriodDto {
 
     private Long id;
     private String name;

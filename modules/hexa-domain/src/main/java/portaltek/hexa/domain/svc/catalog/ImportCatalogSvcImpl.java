@@ -1,30 +1,30 @@
 package portaltek.hexa.domain.svc.catalog;
 
 import lombok.AllArgsConstructor;
-import portaltek.hexa.domain.dto.catalog.Catalog;
-import portaltek.hexa.domain.dto.catalog.Company;
-import portaltek.hexa.domain.dto.catalog.FiscalPeriod;
+import portaltek.hexa.domain.dto.catalog.CatalogDto;
+import portaltek.hexa.domain.dto.catalog.CompanyDto;
+import portaltek.hexa.domain.dto.catalog.FiscalPeriodDto;
 import portaltek.hexa.domain.HexaException;
-import portaltek.hexa.spi.repo.CatalogRepo;
-import portaltek.hexa.spi.repo.CompanyRepo;
-import portaltek.hexa.spi.repo.FiscalPeriodRepo;
+import portaltek.hexa.spi.repo.CatalogDtoRepo;
+import portaltek.hexa.spi.repo.CompanyDtoRepo;
+import portaltek.hexa.spi.repo.FiscalPeriodDtoRepo;
 
 @AllArgsConstructor
 class ImportCatalogSvcImpl implements ImportCatalogSvc {
 
-    CompanyRepo companyRepo;
-    FiscalPeriodRepo fiscalPeriodRepo;
-    CatalogRepo catalogRepo;
+    CompanyDtoRepo companyDtoRepo;
+    FiscalPeriodDtoRepo fiscalPeriodDtoRepo;
+    CatalogDtoRepo catalogDtoRepo;
 
     CreateCatalogNotifier notifier;
 
 
 
-    public Catalog importCatalog(ImportCatalogCmd cmd) throws HexaException {
+    public CatalogDto importCatalog(ImportCatalogCmd cmd) throws HexaException {
 
-        Catalog oldCatalog = catalogRepo
+        CatalogDto oldCatalogDto = catalogDtoRepo
                 .findByCompanyIdAndFiscalPeriodId(cmd.companyId(), cmd.fiscalPeriodId());
-        if (oldCatalog == null){
+        if (oldCatalogDto == null){
             return createCatalog(cmd);
         }
         //updateAccountCatalog
@@ -32,17 +32,17 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
         return null;
     }
 
-    private Catalog createCatalog(ImportCatalogCmd cmd) throws HexaException {
+    private CatalogDto createCatalog(ImportCatalogCmd cmd) throws HexaException {
 
         //QUERY APIs
-        Company company = companyRepo.findById(cmd.companyId());
-        FiscalPeriod fiscalPeriod = fiscalPeriodRepo.findById(cmd.fiscalPeriodId());
+        CompanyDto companyDto = companyDtoRepo.findById(cmd.companyId());
+        FiscalPeriodDto fiscalPeriodDto = fiscalPeriodDtoRepo.findById(cmd.fiscalPeriodId());
 
         //BUILD DTO
-        Catalog catalog = Catalog.builder()
-                .company(company)
-                .fiscalPeriod(fiscalPeriod)
-                .accounts(cmd.accounts())
+        CatalogDto catalogDto = CatalogDto.builder()
+                .companyDto(companyDto)
+                .fiscalPeriodDto(fiscalPeriodDto)
+                .accountDtos(cmd.accountDtos())
                 .build();
 
 
@@ -50,9 +50,9 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
         //validator.validate(catalog);
 
         //Notify SPIs
-        notifier.notify(catalog);
+        notifier.notify(catalogDto);
 
-        return catalog;
+        return catalogDto;
 
     }
 

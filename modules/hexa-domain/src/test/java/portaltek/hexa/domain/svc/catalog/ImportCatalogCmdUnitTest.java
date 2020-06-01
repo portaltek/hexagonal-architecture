@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import portaltek.hexa.domain.HexaException;
-import portaltek.hexa.domain.dto.catalog.Account;
+import portaltek.hexa.domain.dto.catalog.AccountDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,18 +19,18 @@ import static portaltek.hexa.domain.svc.catalog.ImportCatalogTestUtils.getValidA
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-class ImportCatalogDtoUnitTest {
+class ImportCatalogCmdUnitTest {
 
     @Test
     public void givenRepeatedValidAccounts_whenDtoCreation_thenThrowException() throws HexaException {
-        Account a1 = getValidAccount(1L).code("100");
-        Account a2 = getValidAccount(2L).code("100");
+        AccountDto a1 = getValidAccount(1L).code("100");
+        AccountDto a2 = getValidAccount(2L).code("100");
 
-        List<Account> accounts = Stream.of(a1, a2).collect(Collectors.toList());
+        List<AccountDto> accountDtos = Stream.of(a1, a2).collect(Collectors.toList());
 
         HexaException exception = assertThrows(HexaException.class,
                 () -> {
-                    new ImportCatalogCmd(1L, 1L, accounts);
+                    new ImportCatalogCmd(1L, 1L, accountDtos);
                 });
         assertEquals(2, exception.by(ACCOUNT_CODE_DUPLICATED).size());
 
@@ -39,13 +39,13 @@ class ImportCatalogDtoUnitTest {
 
     @Test
     public void givenInvalidAccounts_whenDtoCreation_thenThrowException() throws HexaException {
-        List<Account> accounts = Stream.of(getValidAccount(1L), getValidAccount(2L))
+        List<AccountDto> accountDtos = Stream.of(getValidAccount(1L), getValidAccount(2L))
                 .map(i -> i.description(""))
                 .collect(Collectors.toList());
 
         HexaException exception = assertThrows(HexaException.class,
                 () -> {
-                    new ImportCatalogCmd(1L, 1L, accounts);
+                    new ImportCatalogCmd(1L, 1L, accountDtos);
                 });
 
         //log.info("Errors: {}", exception.errors());
@@ -55,10 +55,10 @@ class ImportCatalogDtoUnitTest {
     @Test
     public void givenInvalidCompany_whenDtoCreation_thenThrowException() {
 
-        List<Account> accounts = Stream.of(getValidAccount(1L)).collect(Collectors.toList());
+        List<AccountDto> accountDtos = Stream.of(getValidAccount(1L)).collect(Collectors.toList());
         HexaException exception = assertThrows(HexaException.class,
                 () -> {
-                    new ImportCatalogCmd(null, 1L, accounts);
+                    new ImportCatalogCmd(null, 1L, accountDtos);
                 });
 
         //log.info("Exception: {}", exception);

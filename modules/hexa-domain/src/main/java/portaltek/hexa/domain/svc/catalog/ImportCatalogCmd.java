@@ -4,7 +4,7 @@ import lombok.Value;
 import lombok.experimental.Accessors;
 import org.apache.commons.collections4.CollectionUtils;
 import portaltek.hexa.domain.HexaException;
-import portaltek.hexa.domain.dto.catalog.Account;
+import portaltek.hexa.domain.dto.catalog.AccountDto;
 
 import java.util.List;
 
@@ -18,15 +18,15 @@ public class ImportCatalogCmd {
 
     private Long companyId;
     private Long fiscalPeriodId;
-    private List<Account> accounts;
+    private List<AccountDto> accountDtos;
 
     public ImportCatalogCmd(Long companyId,
                             Long fiscalPeriodId,
-                            List<Account> accounts)
+                            List<AccountDto> accountDtos)
             throws HexaException {
         this.companyId = companyId;
         this.fiscalPeriodId = fiscalPeriodId;
-        this.accounts = accounts;
+        this.accountDtos = accountDtos;
         validate();
     }
 
@@ -39,10 +39,10 @@ public class ImportCatalogCmd {
         if (fiscalPeriodId == null) {
             exception.add(FISCAL_PERIOD_IS_EMPTY);
         }
-        if (CollectionUtils.isEmpty(accounts)) {
+        if (CollectionUtils.isEmpty(accountDtos)) {
             exception.add(ACCOUNT_LIST_IS_EMPTY);
         } else {
-            accounts.stream()
+            accountDtos.stream()
                     .forEach(i -> validate(i, exception));
         }
 
@@ -50,31 +50,31 @@ public class ImportCatalogCmd {
     }
 
 
-    private void validate(Account account, HexaException exception) {
-        validateUnique(account, exception);
-        if (isEmpty(account.description()) ||
-                isEmpty(account.name()) ||
-                isEmpty(account.code())) {
-            exception.add(ACCOUNT_IS_INVALID, account.toString());
+    private void validate(AccountDto accountDto, HexaException exception) {
+        validateUnique(accountDto, exception);
+        if (isEmpty(accountDto.description()) ||
+                isEmpty(accountDto.name()) ||
+                isEmpty(accountDto.code())) {
+            exception.add(ACCOUNT_IS_INVALID, accountDto.toString());
         }
     }
 
-    private void validateUnique(Account account, HexaException exception) {
-        if (hasDuplicatedAccountId(account)) {
-            exception.add(ACCOUNT_ID_DUPLICATED, account.toString());
+    private void validateUnique(AccountDto accountDto, HexaException exception) {
+        if (hasDuplicatedAccountId(accountDto)) {
+            exception.add(ACCOUNT_ID_DUPLICATED, accountDto.toString());
         }
-        if (hasDuplicatedAccountCode(account)) {
-            exception.add(ACCOUNT_CODE_DUPLICATED, account.toString());
+        if (hasDuplicatedAccountCode(accountDto)) {
+            exception.add(ACCOUNT_CODE_DUPLICATED, accountDto.toString());
         }
     }
 
-    private boolean hasDuplicatedAccountCode(Account account) {
-        return accounts.stream().filter(a -> a.code().equals(account.code()))
+    private boolean hasDuplicatedAccountCode(AccountDto accountDto) {
+        return accountDtos.stream().filter(a -> a.code().equals(accountDto.code()))
                 .count() > 1;
     }
 
-    private boolean hasDuplicatedAccountId(Account account) {
-        return accounts.stream().filter(a -> a.id().equals(account.id()))
+    private boolean hasDuplicatedAccountId(AccountDto accountDto) {
+        return accountDtos.stream().filter(a -> a.id().equals(accountDto.id()))
                 .count() > 1;
     }
 

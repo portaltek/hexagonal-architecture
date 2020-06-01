@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 
 @Slf4j
 @SpringBootTest
-class IT_CompanyDao {
+class IT_CompanyDtoDao {
 
 	@Autowired
     private CompanyDao dao;
