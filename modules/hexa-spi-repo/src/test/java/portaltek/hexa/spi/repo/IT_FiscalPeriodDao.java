@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import portaltek.hexa.spi.repo.entities.FiscalPeriod;
-import portaltek.hexa.spi.repo.repo.FiscalPeriodDao;
+import portaltek.hexa.spi.repo.dao.FiscalPeriodDao;
 
 import static org.junit.Assert.assertNotNull;
 

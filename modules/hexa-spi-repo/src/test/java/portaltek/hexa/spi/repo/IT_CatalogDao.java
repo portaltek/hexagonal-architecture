@@ -9,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import portaltek.hexa.spi.repo.entities.Catalog;
 import portaltek.hexa.spi.repo.entities.Company;
 import portaltek.hexa.spi.repo.entities.FiscalPeriod;
-import portaltek.hexa.spi.repo.repo.CatalogDao;
-import portaltek.hexa.spi.repo.repo.CompanyDao;
-import portaltek.hexa.spi.repo.repo.FiscalPeriodDao;
+import portaltek.hexa.spi.repo.dao.CatalogDao;
+import portaltek.hexa.spi.repo.dao.CompanyDao;
+import portaltek.hexa.spi.repo.dao.FiscalPeriodDao;
 
 import static org.junit.Assert.assertNotNull;
 import static portaltek.hexa.spi.repo._TestUtil_CatalogBuilder.*;

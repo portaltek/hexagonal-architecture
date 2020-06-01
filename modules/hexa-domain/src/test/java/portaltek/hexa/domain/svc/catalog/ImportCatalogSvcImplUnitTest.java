@@ -30,7 +30,7 @@ class ImportCatalogSvcImplUnitTest {
     @Mock
     CatalogRepo catalogRepo;
     @Mock
-    ImportCatalogNotifier notifier;
+    CreateCatalogNotifier notifier;
 
     @InjectMocks
     ImportCatalogSvcImpl svc;

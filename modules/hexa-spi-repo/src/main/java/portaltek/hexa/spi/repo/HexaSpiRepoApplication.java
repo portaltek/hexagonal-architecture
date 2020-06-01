@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import portaltek.hexa.spi.repo.repo.CatalogDao;
+import portaltek.hexa.spi.repo.dao.CatalogDao;
 
 @SpringBootApplication
 public class HexaSpiRepoApplication {

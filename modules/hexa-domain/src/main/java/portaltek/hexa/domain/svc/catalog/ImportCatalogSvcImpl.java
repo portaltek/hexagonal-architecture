@@ -16,8 +16,7 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
     FiscalPeriodRepo fiscalPeriodRepo;
     CatalogRepo catalogRepo;
 
-    ImportCatalogValidator validator;
-    ImportCatalogNotifier notifier;
+    CreateCatalogNotifier notifier;
 
 
 

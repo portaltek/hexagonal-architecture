@@ -1,4 +1,4 @@
-package portaltek.hexa.spi.repo.repo;
+package portaltek.hexa.spi.repo.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import portaltek.hexa.spi.repo.entities.Company;

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import portaltek.hexa.spi.repo.entities.Company;
-import portaltek.hexa.spi.repo.repo.CompanyDao;
+import portaltek.hexa.spi.repo.dao.CompanyDao;
 
 import static org.junit.Assert.assertNotNull;
 
