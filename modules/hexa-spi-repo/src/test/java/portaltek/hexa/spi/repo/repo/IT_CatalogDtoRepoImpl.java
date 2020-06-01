@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import portaltek.hexa.domain.dto.catalog.CatalogDto;
+import portaltek.hexa.spi.repo.CatalogDtoRepo;
+import portaltek.hexa.spi.repo.converter.RepoToDtoCatalogConverter;
 import portaltek.hexa.spi.repo.dao.CatalogDao;
 import portaltek.hexa.spi.repo.dao.CompanyDao;
 import portaltek.hexa.spi.repo.dao.FiscalPeriodDao;
@@ -22,13 +25,15 @@ import static portaltek.hexa.spi.repo._TestUtil_CatalogBuilder.*;
 class IT_CatalogDtoRepoImpl {
 
     @Autowired
-    private CatalogDao dao;
+    private CatalogDao catalogDao;
     @Autowired
     private FiscalPeriodDao fiscalPeriodDao;
     @Autowired
     private CompanyDao companyDao;
-//    @Autowired
-//    private CatalogDtoRepo repo;
+    @Autowired
+    RepoToDtoCatalogConverter converter;
+    @Autowired
+    private CatalogDtoRepo repo;
 
     @BeforeEach
     void init() {
@@ -38,14 +43,16 @@ class IT_CatalogDtoRepoImpl {
                 .company(company)
                 .fiscalPeriod(fiscalPeriod)
                 .accounts(null);
-        dao.save(catalog1);
+        catalogDao.save(catalog1);
     }
 
     @Test
     void findByCompanyIdAndFiscalPeriodId() {
-        Catalog c = dao.findByCompanyIdAndFiscalPeriodId(2L, 1L);
-        assertNotNull(c);
-        assertEquals(3L, c.id());
+
+        CatalogDto dto = repo.findByCompanyIdAndFiscalPeriodId(2L, 1L);
+
+        assertNotNull(dto);
+        assertEquals(3L, dto.id());
     }
 
 

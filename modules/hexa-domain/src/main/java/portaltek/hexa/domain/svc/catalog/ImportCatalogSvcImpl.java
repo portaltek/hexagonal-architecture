@@ -39,11 +39,10 @@ class ImportCatalogSvcImpl implements ImportCatalogSvc {
         FiscalPeriodDto fiscalPeriodDto = fiscalPeriodDtoRepo.findById(cmd.fiscalPeriodId());
 
         //BUILD DTO
-        CatalogDto catalogDto = CatalogDto.builder()
+        CatalogDto catalogDto = new CatalogDto()
                 .companyDto(companyDto)
                 .fiscalPeriodDto(fiscalPeriodDto)
-                .accountDtos(cmd.accountDtos())
-                .build();
+                .accountDtos(cmd.accountDtos());
 
 
 
