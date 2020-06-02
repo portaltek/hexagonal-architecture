@@ -1,7 +1,6 @@
 package portaltek.hexa.spi.repo.repo;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,8 +34,8 @@ class IT_CatalogDtoRepoImpl {
     @Autowired
     private CatalogDtoRepo repo;
 
-    @BeforeEach
-    void init() {
+
+    void givenValidCatalogInRepo() {
         FiscalPeriod fiscalPeriod = fiscalPeriodDao.save(getValidFiscalPeriod(1L));
         Company company = companyDao.save(getValidCompany(1L));
         Catalog catalog1 = getValidCatalog(1L, 3L).id(null)
@@ -48,6 +47,7 @@ class IT_CatalogDtoRepoImpl {
 
     @Test
     void findByCompanyIdAndFiscalPeriodId() {
+        givenValidCatalogInRepo();
 
         CatalogDto dto = repo.findByCompanyIdAndFiscalPeriodId(2L, 1L);
 

@@ -12,7 +12,7 @@ import portaltek.hexa.spi.repo.entities.Catalog;
 public class CatalogDtoRepoImpl implements CatalogDtoRepo {
 
     @Autowired
-    private CatalogDao catalogDao;
+    CatalogDao catalogDao;
     @Autowired
     RepoToDtoCatalogConverter converter;
 
