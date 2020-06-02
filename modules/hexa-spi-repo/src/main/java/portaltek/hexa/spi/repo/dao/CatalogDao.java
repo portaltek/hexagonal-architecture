@@ -7,7 +7,7 @@ import portaltek.hexa.spi.repo.entities.Catalog;
 
 public interface CatalogDao extends CrudRepository<Catalog, Long> {
 
-    @Query("FROM Catalog c WHERE c.company.id=?1 AND c.fiscalPeriod.id=?2")
+    @Query(name = "Catalog.findByCompanyIdAndFiscalPeriodId")
     Catalog findByCompanyIdAndFiscalPeriodId(Long companyId, Long fiscalPeriodId);
 
 }
